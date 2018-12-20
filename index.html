@@ -14,6 +14,7 @@
 with(processingInstance){
 
 size(400, 400); 
+//This code is protected under several copyrights (Creative Commons, MIT liscence, etc.,) Copying is not allowed without any exceptions
 /**WARNING: DO NOT CHANGE THIS CODE. IT WILL RESTART YOUR PROGRAM AND MIGHT DISABLE FUNCTIONALLITY. EVERY LINE COUNTS!*/
 //Made By: Julian Dominguez; 7th grade.
 //Start: Tuesday, December 4th
@@ -374,36 +375,45 @@ Mover.prototype.checkEdges = function() {
         this.position.y = height;
     }
 };
-var fillc = color(0, 255, 0);
+var fillc = color(0, 0, 255);
 var Thing = function(){
 this.position = new PVector(mouseX, mouseY);
 this.size = new PVector(11, 11);
 };
 Thing.prototype.display = function(){
+if(keyIsPressed === false){
 fill(fillc);
 noStroke();
+//top
 rect(this.position.x, this.position.y, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+5, this.position.y+5, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+-5, this.position.y+-5, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+-15, this.position.y+5, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+-10, this.position.y, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+-20, this.position.y+10, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+10, this.position.y+10, this.size.x+-5, this.size.y+-5);
-rect(this.position.x+-5, this.position.y+10, this.size.x+-5, this.size.y+-5);
+//lefttop
+rect(this.position.x+-4, this.position.y+5, this.size.x+-5, this.size.y+-5);
+//right top
+rect(this.position.x+4, this.position.y+5, this.size.x+-5, this.size.y+-5);
+//right
+rect(this.position.x+7, this.position.y+10, this.size.x+-5, this.size.y+-5);
+//left
+rect(this.position.x+-7, this.position.y+10, this.size.x+-5, this.size.y+-5);
+//right
+rect(this.position.x+10, this.position.y+15, this.size.x+-5, this.size.y+-5);
+//left
+rect(this.position.x+-10, this.position.y+15, this.size.x+-5, this.size.y+-5);
+rect(this.position.x, this.position.y+15, this.size.x+-5, this.size.y+-5);
+}
 };
 Thing.prototype.update = function(){
 this.position.x = mouseX;
 this.position.y = mouseY;
 };
 Thing.prototype.mouseC = function(){
-fillc = color(0, 26, 255);
-this.size.x += 0.5;
-this.size.y += 0.5;
+    fillc = color(0, 255, 0);
+this.size.x += 0.1;
+this.size.y += 0.1;
 };
 Thing.prototype.mouseR = function(){
-fillc = color(0, 255, 0);
-this.size.x -= 0.5;
-this.size.y -= 0.5;
+fillc = color(0, 0, 255);
+this.size.x -= 0.1;
+this.size.y -= 0.1;
 };
 var thing = new Thing();
 
