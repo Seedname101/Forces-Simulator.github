@@ -697,29 +697,32 @@ text("- Gravity", width-width+15, height-height+27);
 text("+ Gravity", width-width+94, height-height+27);
 textSize(15);
 fill(255, 255, 255);
-text("Gravity:" + " " + gravWV, width-width+48, height-height+52);
-text("Mass:" + " " + multiplyWindM, width-width+287,  height-height+52);
+text("Gravity:" + " " + round(attractor.G*10)/10, width-width+48, height-height+52);
+text("Mass 1:" + " " + attractor.mass, width-width+276,  height-height+52);
 fill(255, 255, 255);
 rect(width-width+385-62-62-13, height-height+10, 62, 25);
 rect(width-width+385-62, height-height+10, 62, 25);
 fill(0, 0, 0);
 textSize(12);
-text("- Mass", width-width+256, height-height+27);
-text("+ Mass", width-width+330, height-height+27);
+text("- Mass 1", width-width+256, height-height+27);
+text("+ Mass 1", width-width+330, height-height+27);
 fill(255, 255, 255);
 rect(width-width+12, height-height+59, 62, 25);
 rect(width-width+87, height-height+59, 62, 25);
 fill(0, 0, 0);
-text("- Wind", width-width+15, height-height+76);
-text("+ Wind", width-width+94, height-height+76);
+text("- Mass 2", width-width+15, height-height+76);
+text("+ Mass 2", width-width+94, height-height+76);
 textSize(15);
 fill(255, 255, 255);
-text("Air Resistaince: " + ARV, width-width+160, height-height+79);
+text("Mass 2: " + mover.mass, width-width+160, height-height+79);
 fill(255, 255, 255);
 rect(width-62-15, height-height+59, 62, 25);
 textSize(12);
 fill(0, 0, 0);
-text("Defenition", width-62-12, height-height+76);
+text("Formula", width-62-9, height-height+76);
+var spd = floor(dist(mover.position.x, mover.position.y, attractor.position.x, attractor.position.y));
+fill(255, 255, 255);
+text("Distance of the planet to the sun: " + spd + " million miles", 14, 105);
 
   var force = attractor.calculateAttraction(mover);
  
@@ -728,7 +731,6 @@ text("Defenition", width-62-12, height-height+76);
  
   attractor.display();
   mover.display();
-  
   
 }
 if((a.position.y < 355) && something === 2){
@@ -967,7 +969,8 @@ thing.update();
 };
 mouseClicked = function(){
     //start button
-if((mouseX >= width/2-60 && mouseX <= width/2-60+100 && 
+    
+if(timer > 51 &&(mouseX >= width/2-60 && mouseX <= width/2-60+100 && 
     mouseY >= height/2+107 && mouseY <= height/2+107+60) && something === 0){
         something += 1;
     }
@@ -1098,9 +1101,37 @@ mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 3)
         fin = 0;
         fr.velocity.x = 0;
 }
+//something is 4, grav attr.
+//grav
+if((mouseX >= width-width+12 && mouseX <= width-width+12+62 &&
+    mouseY >= height-height+10 && mouseY <= height-height+10+25)&& something === 4){
+        attractor.G -= 1/10;
+    }
+if((mouseX >= width-width+87 && mouseX <= width-width+87+62 &&
+    mouseY >= height-height+10 && mouseY <= height-height+10+25)&& something === 4){
+        attractor.G += 1/10;
+    }
+//mass 2
+if((mouseX >= width-width+385-62-62-13 && mouseX <= width-width+385-62-62-13+62 &&
+    mouseY >= height-height+10 && mouseY <= height-height+10+25) && something === 4){
+        attractor.mass -= 1;
+    }
+if((mouseX >= width-width+385-62 && mouseX <= width-width+385-62+62 &&
+    mouseY >= height-height+10 && mouseY <= height-height+10+25) && something === 4){
+        attractor.mass += 1;
+    }
+//mass 2
+ if((mouseX >= width-width+12 && mouseX <= width-width+12+62 && 
+mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 4){
+        mover.mass -= 1;
+}
+if((mouseX >= width-width+87 && mouseX <= width-width+87+62 && 
+mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 4){
+       mover.mass += 1;
+}
  //'Next' Button
-if(mouseX >= width/2-31 && mouseX <=width/2-31+62 && 
-mouseY >= height-height+10 && mouseY <= height-height+10+25){
+if((mouseX >= width/2-31 && mouseX <=width/2-31+62 && 
+mouseY >= height-height+10 && mouseY <= height-height+10+25) && something > 0){
         something += 1;
         a.position.y = height-height-multiplyWindM;
         gsim.positionG.y = height-height-multiplyMass1w;
@@ -1114,23 +1145,23 @@ if(def === 0 && (mouseX >= width-62-15 && mouseX <= width-62-15+62 &&
 mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 1){
     def = 1;
 }
-if(def === 1 &&(mouseX >= width-70 && mouseX <= width-70+20 && mouseY >= height-50 && mouseY <= height-50+20) && something === 1){
-   def = 0;
-}
 //Def button Air Resistance
 if(def === 0 && (mouseX >= width-62-15 && mouseX <= width-62-15+62 && 
 mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 2){
     def = 2;
-}
-if(def === 2 &&(mouseX >= width-70 && mouseX <= width-70+20 && mouseY >= height-50 && mouseY <= height-50+20) && something === 2){
-   def = 0;
 }
 //def button friction
 if(def === 0 && (mouseX >= width-62-15 && mouseX <= width-62-15+62 && 
 mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 3){
     def = 3;
 }
-if(def === 3 &&(mouseX >= width-70 && mouseX <= width-70+20 && mouseY >= height-50 && mouseY <= height-50+20) && something === 3){
+//form def button gravtiy attraction
+if(def === 0 && (mouseX >= width-62-15 && mouseX <= width-62-15+62 && 
+mouseY >= height-height+59 && mouseY <= height-height+59+25) && something === 4){
+    def = 4;
+}
+//exit def button
+if(def > 0 && (mouseX >= width-70 && mouseX <= width-70+20 && mouseY >= height-50 && mouseY <= height-50+20)){
    def = 0;
 }
 };
