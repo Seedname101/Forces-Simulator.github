@@ -96,8 +96,6 @@ MoverIntro.prototype.checkEdges = function() {
         this.introPosition.y = height-2;
     }
 };
-
-
 var GravSim = function() {
     this.massG = 1;
     this.positionG = new PVector(width/2-multiplyMass1w*0.5, -50);
@@ -870,36 +868,7 @@ if(def === 3){
     fill(0, 0, 0);
     text("X", width-65, height-34);
 }
- if(def === 4){
-    var spd = floor(dist(mover.position.x, mover.position.y, attractor.position.x, attractor.position.y));
-     fill(0, 100);
-    rect(0, 0, 400, 400);
-    fill(255, 255, 255);
-    rect(width/2-150, height/2-130, 300, 300);
-    textSize(30);
-    fill(0, 0, 0);
-    text("Formula for\nGravitational Force:", width-width+60, height-height+100);
-    textSize(40);
-    text("G", width-width+77+100-29, height-height+200);
-    textSize(17);
-    text("m1" + " m2", 107+100-25, 184);
-    text("______", 104+100-25, 187);
-    text("r^2", 114+100-19, 204);
-    text("In This Case:", 149, 232);
-    textSize(35);
-    text(round(attractor.G*10)/1 + "/10", width-width+77+47-29, height-height+200+85);
-    textSize(17);
-    text(attractor.mass + "*" + mover.mass, 107+100-25, 184+85);
-    text("______", 104+100-25, 187+85);
-    text(spd + "M" + "^2", 114+85-19, 204+85);
-    textSize(10);
-    text("(Click the X to exit)", width-width+60, height-height+322);
-    fill(255, 0, 0);
-    rect(width-70, height-50, 20, 20);
-    textSize(15);
-    fill(0, 0, 0);
-    text("X", width-65, height-34);
-}
+
 if(gravityW > 1){
     gravityW = 1;
     gravWV = 10;
